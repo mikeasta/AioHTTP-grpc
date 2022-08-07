@@ -12,6 +12,9 @@ client = API_Client(f"{settings.BACKEND_HOST}:{settings.BACKEND_PORT}")
 async def StringRequest(msg):
     return client.StringRequest(msg)
 
+async def NDArrayRequest(array):
+    return client.NDArrayRequest(array)
+
 @routes.get('/')
 async def home(request):
     logging.info("Hello World!")
@@ -22,6 +25,13 @@ async def string(request):
     result = await StringRequest("This is string request")
     logging.info(result)
     return web.json_response({'result': "This is string request"}, status=200)
+
+@routes.get('/ndarray/')
+async def string(request):
+    result = await NDArrayRequest([[1, 2], [3, 4]])
+    result = result.tolist()
+    logging.info(result)
+    return web.json_response({'result': result}, status=200)
 
 app.add_routes(routes)
 
