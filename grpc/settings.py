@@ -1,5 +1,6 @@
 # Server settings: port and host
 import os
 
+FRONTEND_PORT = int(os.getenv('FRONTEND_PORT', '5000'))
 BACKEND_PORT = int(os.getenv('BACKEND_PORT', '50051'))
 BACKEND_HOST = os.getenv('BACKEND_HOST', 'localhost')
