@@ -6,14 +6,14 @@ import numpy as np
 from dotenv import load_dotenv
 from PIL import Image
 from numproto import ndarray_to_proto, proto_to_ndarray
-from messages.msg_pb2 import StringMessage, NDArrayMessage, ImageMessage, Response
-from messages.msg_pb2_grpc import FlaskServiceServicer, FlaskServiceStub
+from messages.msg_pb2 import StringMessage, NDArrayMessage, ImageMessage
+from messages.msg_pb2_grpc import AioServiceServicer, AioServiceStub
 
 # Enable messages import
 sys.path.append('../')
 
 # Request server handler
-class API_Server(FlaskServiceServicer):
+class API_Server(AioServiceServicer):
     def StringRequest(self, request, context):
         return StringMessage(msg=request.msg)
 
@@ -27,7 +27,7 @@ class API_Server(FlaskServiceServicer):
 class API_Client:
     def __init__(self, target):
         channel = grpc.insecure_channel(target)
-        self.client = FlaskServiceStub(channel)
+        self.client = AioServiceStub(channel)
     
     def StringRequest(self, message):
         protobuf = StringMessage(msg=message)

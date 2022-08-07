@@ -6,7 +6,7 @@ package flask_grpc;
 
 // Unary gRPC connections
 // to be able to transfer different data types
-service FlaskService {
+service AioService {
     rpc StringRequest (StringMessage) returns (StringMessage);
     rpc NDArrayRequest (NDArrayMessage) returns (NDArrayMessage);
     rpc ImageRequest (ImageMessage) returns (ImageMessage);

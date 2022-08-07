@@ -11,12 +11,11 @@ from google.protobuf import symbol_database as _symbol_database
 
 _sym_db = _symbol_database.Default()
 
-# IMPORTANT:
-# Dont forget to add 'from .' to avoid errors
+
 from . import ndarray_pb2 as ndarray__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tmsg.proto\x12\nflask_grpc\x1a\rndarray.proto\"\x1c\n\rStringMessage\x12\x0b\n\x03msg\x18\x01 \x01(\t\"=\n\x0eNDArrayMessage\x12+\n\x07ndarray\x18\x01 \x01(\x0b\x32\x1a.numproto.protobuf.NDArray\"A\n\x0cImageMessage\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\x12\x12\n\nimage_data\x18\x03 \x01(\x0c\x32\xe3\x01\n\x0c\x46laskService\x12\x45\n\rStringRequest\x12\x19.flask_grpc.StringMessage\x1a\x19.flask_grpc.StringMessage\x12H\n\x0eNDArrayRequest\x12\x1a.flask_grpc.NDArrayMessage\x1a\x1a.flask_grpc.NDArrayMessage\x12\x42\n\x0cImageRequest\x12\x18.flask_grpc.ImageMessage\x1a\x18.flask_grpc.ImageMessageb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tmsg.proto\x12\nflask_grpc\x1a\rndarray.proto\"\x1c\n\rStringMessage\x12\x0b\n\x03msg\x18\x01 \x01(\t\"=\n\x0eNDArrayMessage\x12+\n\x07ndarray\x18\x01 \x01(\x0b\x32\x1a.numproto.protobuf.NDArray\"A\n\x0cImageMessage\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\x12\x12\n\nimage_data\x18\x03 \x01(\x0c\x32\xe1\x01\n\nAioService\x12\x45\n\rStringRequest\x12\x19.flask_grpc.StringMessage\x1a\x19.flask_grpc.StringMessage\x12H\n\x0eNDArrayRequest\x12\x1a.flask_grpc.NDArrayMessage\x1a\x1a.flask_grpc.NDArrayMessage\x12\x42\n\x0cImageRequest\x12\x18.flask_grpc.ImageMessage\x1a\x18.flask_grpc.ImageMessageb\x06proto3')
 
 
 
@@ -44,7 +43,7 @@ ImageMessage = _reflection.GeneratedProtocolMessageType('ImageMessage', (_messag
   })
 _sym_db.RegisterMessage(ImageMessage)
 
-_FLASKSERVICE = DESCRIPTOR.services_by_name['FlaskService']
+_AIOSERVICE = DESCRIPTOR.services_by_name['AioService']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
@@ -54,6 +53,6 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _NDARRAYMESSAGE._serialized_end=131
   _IMAGEMESSAGE._serialized_start=133
   _IMAGEMESSAGE._serialized_end=198
-  _FLASKSERVICE._serialized_start=201
-  _FLASKSERVICE._serialized_end=428
+  _AIOSERVICE._serialized_start=201
+  _AIOSERVICE._serialized_end=426
 # @@protoc_insertion_point(module_scope)

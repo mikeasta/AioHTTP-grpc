@@ -2,12 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-# IMPORTANT:
-# Dont forget to add 'from .' to avoid errors
 from . import msg_pb2 as msg__pb2
 
 
-class FlaskServiceStub(object):
+class AioServiceStub(object):
     """Unary gRPC connections
     to be able to transfer different data types
     """
@@ -19,23 +17,23 @@ class FlaskServiceStub(object):
             channel: A grpc.Channel.
         """
         self.StringRequest = channel.unary_unary(
-                '/flask_grpc.FlaskService/StringRequest',
+                '/flask_grpc.AioService/StringRequest',
                 request_serializer=msg__pb2.StringMessage.SerializeToString,
                 response_deserializer=msg__pb2.StringMessage.FromString,
                 )
         self.NDArrayRequest = channel.unary_unary(
-                '/flask_grpc.FlaskService/NDArrayRequest',
+                '/flask_grpc.AioService/NDArrayRequest',
                 request_serializer=msg__pb2.NDArrayMessage.SerializeToString,
                 response_deserializer=msg__pb2.NDArrayMessage.FromString,
                 )
         self.ImageRequest = channel.unary_unary(
-                '/flask_grpc.FlaskService/ImageRequest',
+                '/flask_grpc.AioService/ImageRequest',
                 request_serializer=msg__pb2.ImageMessage.SerializeToString,
                 response_deserializer=msg__pb2.ImageMessage.FromString,
                 )
 
 
-class FlaskServiceServicer(object):
+class AioServiceServicer(object):
     """Unary gRPC connections
     to be able to transfer different data types
     """
@@ -59,7 +57,7 @@ class FlaskServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_FlaskServiceServicer_to_server(servicer, server):
+def add_AioServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'StringRequest': grpc.unary_unary_rpc_method_handler(
                     servicer.StringRequest,
@@ -78,12 +76,12 @@ def add_FlaskServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'flask_grpc.FlaskService', rpc_method_handlers)
+            'flask_grpc.AioService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class FlaskService(object):
+class AioService(object):
     """Unary gRPC connections
     to be able to transfer different data types
     """
@@ -99,7 +97,7 @@ class FlaskService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/flask_grpc.FlaskService/StringRequest',
+        return grpc.experimental.unary_unary(request, target, '/flask_grpc.AioService/StringRequest',
             msg__pb2.StringMessage.SerializeToString,
             msg__pb2.StringMessage.FromString,
             options, channel_credentials,
@@ -116,7 +114,7 @@ class FlaskService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/flask_grpc.FlaskService/NDArrayRequest',
+        return grpc.experimental.unary_unary(request, target, '/flask_grpc.AioService/NDArrayRequest',
             msg__pb2.NDArrayMessage.SerializeToString,
             msg__pb2.NDArrayMessage.FromString,
             options, channel_credentials,
@@ -133,7 +131,7 @@ class FlaskService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/flask_grpc.FlaskService/ImageRequest',
+        return grpc.experimental.unary_unary(request, target, '/flask_grpc.AioService/ImageRequest',
             msg__pb2.ImageMessage.SerializeToString,
             msg__pb2.ImageMessage.FromString,
             options, channel_credentials,
