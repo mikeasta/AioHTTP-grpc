@@ -26,13 +26,21 @@ async def home(request):
 
 @routes.get('/string/')
 async def string_get_request(request):
-    result = await StringRequest("This is string request")
+    # Request raw pattern
+    # { "data": "string"}
+
+    req_body = await request.json()
+    result  = await StringRequest(req_body['data'])
     logging.info(result)
-    return web.json_response({'result': "This is string request"}, status=200)
+    return web.json_response({'result': result}, status=200)
 
 @routes.get('/ndarray/')
 async def ndarray_get_request(request):
-    result = await NDArrayRequest([[1, 2], [3, 4]])
+    # Request raw pattern
+    # { "data": array }
+
+    req_body = await request.json()
+    result = await NDArrayRequest(req_body['data'])
     result = result.tolist()
     logging.info(result)
     return web.json_response({'result': result}, status=200)
@@ -42,6 +50,7 @@ async def image_get_request(request):
     result = await ImageRequest()
     [width, height, image_data] = result
     bytes2image(image_data) # Image downloading
+    logging.info(f'Width: {width}, height: {height}')
     return web.json_response({'result': {'width' : width, 'height': height}}, status=200)
 
 app.add_routes(routes)
