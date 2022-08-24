@@ -2,11 +2,21 @@ import logging
 from aiohttp import web
 from utils.pb_handler import API_Client
 from utils.bytes2image import bytes2image
+from aiohttp_healthcheck import HealthCheck, EnvironmentDump
 import settings
 
 app    = web.Application()
 routes = web.RouteTableDef()
 client = API_Client(f"{settings.BACKEND_HOST}:{settings.BACKEND_PORT}")
+
+health = HealthCheck()
+app.router.add_get("/healthcheck", health)
+
+def redis_available():
+    info = client.info()
+    return info
+
+health.add_check(redis_available)
 
 # Async data request commands
 async def StringRequest(msg):
