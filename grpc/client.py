@@ -12,11 +12,10 @@ client = API_Client(f"{settings.BACKEND_HOST}:{settings.BACKEND_PORT}")
 health = HealthCheck()
 app.router.add_get("/healthcheck", health)
 
-def redis_available():
-    info = client.info()
-    return info
+def health_check():
+    return True, "Ping ok"
 
-health.add_check(redis_available)
+health.add_check(health_check)
 
 # Async data request commands
 async def StringRequest(msg):
